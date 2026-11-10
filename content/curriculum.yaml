@@ -1,0 +1,295 @@
+# Immersive Growth: the curriculum graph.
+# Curriculums contain courses. Courses contain chapters. Chapters contain lessons.
+# `requires` on a course = courses that must be mastered first (sequential).
+# Courses without a shared requires chain run in parallel.
+# `builds_on` on a lesson = past lessons it draws on (vertical and horizontal links).
+# `leads_to` is computed at build time, so every past lesson knows its future.
+# Lessons listed under `lessons` are written; chapters with only `plan` are being written.
+
+curriculums:
+  - id: found
+    title: Foundations
+    blurb: How value, money and wealth actually work, and the thinking tools to reason about them.
+    courses:
+      - id: wealth
+        title: Wealth, leverage and judgment
+        blurb: Why businesses exist, where wealth comes from, and what makes one person's decisions worth a thousand times another's.
+        requires: []
+        chapters:
+          - id: wealth-1
+            title: What wealth is
+            lessons:
+              - id: three-games
+                title: Wealth, money and status
+                builds_on: []
+              - id: renting-vs-owning
+                title: Renting your time vs owning equity
+                builds_on: [three-games]
+              - id: compounding
+                title: Compounding, the curve that runs everything
+                builds_on: [renting-vs-owning]
+              - id: positive-sum
+                title: Where wealth comes from, positive sum games
+                builds_on: [three-games, compounding]
+          - id: wealth-2
+            title: Leverage
+            lessons:
+              - id: output-equation
+                title: Why effort alone does not scale
+                builds_on: [renting-vs-owning, positive-sum]
+              - id: labour-capital
+                title: Labour and capital, leverage that needs permission
+                builds_on: [output-equation, compounding]
+              - id: code-media
+                title: Code and media, leverage without permission
+                builds_on: [labour-capital, positive-sum]
+              - id: choosing-leverage
+                title: "Case: Sundial chooses its leverage"
+                builds_on: [code-media, labour-capital, renting-vs-owning]
+          - id: wealth-3
+            title: Specific knowledge
+            plan: [What cannot be trained, Knowledge that feels like play, Productising yourself, "Case: what Sundial knows that nobody else does"]
+          - id: wealth-4
+            title: Judgment and accountability
+            plan: [Judgment is the multiplier, Taking accountability and owning the upside, Decisions that make life easy later, "Case: the founder's first big call"]
+          - id: wealth-5
+            title: Long term games
+            plan: [Trust compounds, Reputation as an asset, Choosing who to play with, "Synthesis: your own wealth equation"]
+
+      - id: money-model
+        title: How a business makes money
+        blurb: Customers, value, price, cost and the unit economics that decide whether a business lives.
+        requires: [wealth]
+        chapters:
+          - {id: mm-1, title: Value and customers, plan: [Jobs customers hire a product for, Willingness to pay, Who pays and who uses]}
+          - {id: mm-2, title: Revenue models, plan: [Transactions and subscriptions, Marketplaces and take rates, Services vs products]}
+          - {id: mm-3, title: Unit economics, plan: [Contribution margin, Customer acquisition cost, Lifetime value and payback, Breakeven]}
+          - {id: mm-4, title: "Case: Sundial's first year", plan: [Building the model, Stress testing assumptions, What the numbers are telling you]}
+
+      - id: accounting
+        title: Accounting from first principles
+        blurb: The three statements rebuilt from scratch, so you can read any company like a story.
+        requires: [money-model]
+        chapters:
+          - {id: ac-1, title: The double entry idea, plan: [Every transaction has two sides, Assets liabilities equity, The accounting equation as a balance]}
+          - {id: ac-2, title: The income statement, plan: [Revenue recognition, Costs and margins, Profit is an opinion]}
+          - {id: ac-3, title: The balance sheet, plan: [What a company owns and owes, Working capital, Depreciation]}
+          - {id: ac-4, title: Cash flow, plan: [Cash is a fact, Why profitable companies die, The cash conversion cycle]}
+          - {id: ac-5, title: "Case: reading Sundial's books", plan: [Building three linked statements, Finding the story in the numbers]}
+
+      - id: finance
+        title: Finance and valuation
+        blurb: Time value of money, risk, and what anything is really worth.
+        requires: [accounting]
+        chapters:
+          - {id: fi-1, title: Time and money, plan: [Discounting, Present value, Rates of return]}
+          - {id: fi-2, title: Risk, plan: [Expected value, Variance and ruin, Diversification]}
+          - {id: fi-3, title: Valuation, plan: [Discounted cash flow, Multiples, Valuing what has no profits yet]}
+          - {id: fi-4, title: Capital structure, plan: [Debt vs equity, Cost of capital, "Case: how should Sundial fund a second studio"]}
+
+      - id: thinking
+        title: Thinking tools
+        blurb: Probability, Fermi estimation and decisions under uncertainty. The tools every later course leans on.
+        requires: [wealth]
+        chapters:
+          - {id: th-1, title: Fermi estimation, plan: [Breaking problems into pieces, Market sizing from scratch, Sanity checks]}
+          - {id: th-2, title: Probability for decisions, plan: [Base rates, Bayesian updating, Power laws vs normal curves]}
+          - {id: th-3, title: Decision making, plan: [Reversible and irreversible decisions, Second order effects, Inversion]}
+          - {id: th-4, title: Mental models, plan: [Incentives, Margin of safety, Map is not the territory]}
+
+  - id: people
+    title: People
+    blurb: Runs alongside everything. Communication, negotiation, teams and leadership.
+    courses:
+      - id: communicating
+        title: Communicating clearly
+        requires: [wealth]
+        chapters:
+          - {id: co-1, title: Clear thinking is clear writing, plan: [Write to be understood, The one page memo, Editing as thinking]}
+          - {id: co-2, title: Speaking, plan: [Structure a talk, Telling stories that carry numbers, Handling questions]}
+          - {id: co-3, title: Listening, plan: [Asking good questions, Hearing what is not said]}
+      - id: negotiation
+        title: Negotiation and persuasion
+        requires: [communicating]
+        chapters:
+          - {id: ne-1, title: The structure of a deal, plan: [Interests vs positions, BATNA, Zone of possible agreement]}
+          - {id: ne-2, title: Persuasion, plan: [Ethos pathos logos, Framing, Anchoring]}
+          - {id: ne-3, title: Long term negotiation, plan: [Win so both want to deal again, Difficult conversations, "Simulation: negotiating Sundial's lease"]}
+      - id: teams
+        title: Hiring, teams and culture
+        requires: [communicating]
+        chapters:
+          - {id: te-1, title: Hiring, plan: [What to hire for, Interviewing for judgment, Your first ten hires]}
+          - {id: te-2, title: Teams, plan: [Team size and coordination, Roles and ownership, Feedback]}
+          - {id: te-3, title: Culture, plan: [Culture is what you do, Values that cost something]}
+      - id: leading
+        title: Leading and managing
+        requires: [teams]
+        chapters:
+          - {id: le-1, title: Managing, plan: [Delegation, One on ones, Performance]}
+          - {id: le-2, title: Leading, plan: [Setting direction, Leading through crisis, Leading yourself]}
+      - id: relationships
+        title: Customers, partners and conflict
+        requires: [negotiation]
+        chapters:
+          - {id: re-1, title: Customers, plan: [Service as strategy, Handling complaints]}
+          - {id: re-2, title: Partners and conflict, plan: [Choosing partners, Co-founder conflict, Ending things well]}
+
+  - id: build
+    title: Building
+    blurb: Starting and scaling a company, from first idea to an organisation that runs without you.
+    courses:
+      - id: problems
+        title: Finding problems worth solving
+        requires: [money-model, thinking]
+        chapters:
+          - {id: pr-1, title: Where good ideas come from, plan: [Problems you live with, Why now, Secrets]}
+          - {id: pr-2, title: Customer discovery, plan: [Interviews that tell the truth, Evidence vs opinions, Synthesis]}
+          - {id: pr-3, title: "Case: is Sundial's problem real", plan: [Running discovery, Deciding to go]}
+      - id: product
+        title: Product and product market fit
+        requires: [problems]
+        chapters:
+          - {id: pd-1, title: The smallest useful thing, plan: [MVP as an experiment, Concierge and wizard of oz tests]}
+          - {id: pd-2, title: Product market fit, plan: [What fit feels like, Measuring retention, When to pivot]}
+          - {id: pd-3, title: Building product, plan: [Prioritisation, Saying no]}
+      - id: gtm
+        title: Pricing, marketing and sales
+        requires: [product]
+        chapters:
+          - {id: gt-1, title: Pricing, plan: [Value based pricing, Packaging and tiers, Discounts and their cost]}
+          - {id: gt-2, title: Marketing, plan: [Positioning, Brand as a promise, Channels]}
+          - {id: gt-3, title: Sales, plan: [The sales funnel, Selling to businesses, Founder led sales]}
+      - id: growth
+        title: Growth loops and retention
+        requires: [gtm]
+        chapters:
+          - {id: gr-1, title: Growth models, plan: [Funnels vs loops, Network effects, Virality]}
+          - {id: gr-2, title: Retention, plan: [Cohorts, Habit and value, Churn]}
+          - {id: gr-3, title: Metrics, plan: [North star metrics, Vanity metrics, Experiments]}
+      - id: fundraising
+        title: Raising money as a founder
+        requires: [growth, finance]
+        chapters:
+          - {id: fu-1, title: Should you raise, plan: [Bootstrapping vs venture, What money costs]}
+          - {id: fu-2, title: The raise, plan: [The pitch, The data room, Running a process]}
+          - {id: fu-3, title: The terms, plan: [Valuation and dilution, Key terms founders miss]}
+      - id: scaling
+        title: Scaling the organisation
+        requires: [fundraising, teams]
+        chapters:
+          - {id: sc-1, title: What breaks at scale, plan: [Communication overhead, Process vs chaos]}
+          - {id: sc-2, title: Org design, plan: [Functional vs product teams, Layers and spans]}
+          - {id: sc-3, title: "Case: Sundial at fifty people", plan: [Diagnosing the organisation, Redesigning it]}
+
+  - id: operate
+    title: Operating
+    blurb: Running a business well. Strategy, operations, money and risk.
+    courses:
+      - id: strategy
+        title: Strategy and competitive advantage
+        requires: [money-model, thinking]
+        chapters:
+          - {id: st-1, title: What strategy is, plan: [Strategy as choice, Good and bad strategy]}
+          - {id: st-2, title: Industry structure, plan: [Five forces, Value chains]}
+          - {id: st-3, title: Moats, plan: [The seven powers, Scale economies, Network effects, Brand, Switching costs]}
+          - {id: st-4, title: "Case: can Sundial build a moat", plan: [Strategy memo]}
+      - id: operations
+        title: Operations and supply chain
+        requires: [strategy]
+        chapters:
+          - {id: op-1, title: Processes, plan: [Throughput and bottlenecks, Queues, Quality]}
+          - {id: op-2, title: Supply chain, plan: [Suppliers, Inventory, Lead times]}
+          - {id: op-3, title: Systems, plan: [Standard operating procedures, Automation]}
+      - id: fpa
+        title: Cash, budgeting and planning
+        requires: [accounting, operations]
+        chapters:
+          - {id: fp-1, title: Cash, plan: [Runway, Cash forecasting]}
+          - {id: fp-2, title: Budgets, plan: [Building a budget, Variance analysis]}
+          - {id: fp-3, title: "Case: Sundial's cash crunch", plan: [Finding the leak, Fixing it]}
+      - id: legal
+        title: Legal, governance and risk
+        requires: [fpa]
+        chapters:
+          - {id: lg-1, title: Company structures, plan: [Entities in India and abroad, Equity and vesting]}
+          - {id: lg-2, title: Contracts and IP, plan: [Contracts that matter, Protecting what you build]}
+          - {id: lg-3, title: Governance and risk, plan: [Boards, Risk registers]}
+
+  - id: wellness
+    title: Wellness lab
+    blurb: One industry studied deeply. Sundial, the case company, lives here.
+    courses:
+      - id: wellness-map
+        title: The wellness market
+        requires: [money-model]
+        chapters:
+          - {id: wm-1, title: Mapping the industry, plan: [Fitness nutrition sleep mind beauty, India vs global, Who wins and why]}
+          - {id: wm-2, title: The consumer, plan: [Why people buy wellness, Trust and evidence]}
+      - id: wellness-models
+        title: Wellness business models
+        requires: [wellness-map, strategy]
+        chapters:
+          - {id: wb-1, title: Models, plan: [Studios and clinics, Subscriptions and apps, Direct to consumer products, Corporate wellness]}
+          - {id: wb-2, title: Economics, plan: [Utilisation, Retention in wellness, Pricing a session]}
+      - id: wellness-trust
+        title: Regulation, claims and evidence
+        requires: [wellness-models]
+        chapters:
+          - {id: wt-1, title: Evidence, plan: [Reading a study, Claims you can and cannot make]}
+          - {id: wt-2, title: Regulation, plan: [Rules in India, Rules abroad]}
+          - {id: wt-3, title: Inner wellness, plan: [Happiness as a skill, Desire and peace, Building a calm business]}
+      - id: wellness-cases
+        title: Wellness case studies
+        requires: [wellness-trust, growth]
+        chapters:
+          - {id: wc-1, title: Cases, plan: [A fitness chain, A wellness app, A DTC brand, A clinic network]}
+
+  - id: invest
+    title: Investing
+    blurb: Sitting on the other side of the table. How venture capital works and how to become an investor.
+    courses:
+      - id: vc-basics
+        title: How venture capital works
+        requires: [finance, fundraising]
+        chapters:
+          - {id: vb-1, title: The fund, plan: [LPs and GPs, Fees and carry, Fund lifecycle]}
+          - {id: vb-2, title: The power law, plan: [Why one deal returns the fund, Portfolio construction]}
+          - {id: vb-3, title: The ecosystem, plan: [Stages from pre seed to growth, India's VC landscape]}
+      - id: sourcing
+        title: Sourcing and theses
+        requires: [vc-basics, strategy]
+        chapters:
+          - {id: so-1, title: Theses, plan: [Building a thesis, Market maps]}
+          - {id: so-2, title: Deal flow, plan: [Where deals come from, Being a founder's first call]}
+      - id: diligence
+        title: Due diligence
+        requires: [sourcing, accounting]
+        chapters:
+          - {id: dd-1, title: Market and product, plan: [Market size, Product and fit]}
+          - {id: dd-2, title: Team and numbers, plan: [Judging founders, Unit economics review]}
+          - {id: dd-3, title: "Case: diligencing Sundial", plan: [The full diligence]}
+      - id: terms
+        title: Term sheets, cap tables and dilution
+        requires: [diligence]
+        chapters:
+          - {id: tm-1, title: Cap tables, plan: [Building a cap table, Dilution through rounds]}
+          - {id: tm-2, title: Terms, plan: [Liquidation preferences, Pro rata, Board seats, SAFEs and notes]}
+      - id: angel
+        title: Angel investing
+        requires: [terms]
+        chapters:
+          - {id: an-1, title: Investing your own money, plan: [How angels think, Small cheques big lessons]}
+          - {id: an-2, title: Syndicates and platforms, plan: [How AngelList changed early stage investing, Syndicates and rolling funds]}
+      - id: portfolio
+        title: Portfolio support and exits
+        requires: [terms]
+        chapters:
+          - {id: pf-1, title: Helping founders, plan: [Being useful, Follow on decisions]}
+          - {id: pf-2, title: Exits, plan: [Acquisitions, IPOs, Secondaries]}
+      - id: vc-career
+        title: Becoming an investor
+        requires: [angel, portfolio]
+        chapters:
+          - {id: vk-1, title: The career, plan: [Paths into VC, Scout programmes, Building a track record]}
+          - {id: vk-2, title: Capstone, plan: [Write the Sundial investment memo, Defend it at a mock investment committee]}

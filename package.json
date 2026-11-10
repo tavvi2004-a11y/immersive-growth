@@ -1,0 +1,15 @@
+{
+  "name": "immersive-growth",
+  "version": "1.0.0",
+  "description": "A personal university.",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "serve": "npm run build && npx --yes http-server dist -p 8080 -c-1"
+  },
+  "devDependencies": {
+    "js-yaml": "^4.3.2",
+    "marked": "^12.0.2"
+  },
+  "private": true,
+  "type": "module"
+}
